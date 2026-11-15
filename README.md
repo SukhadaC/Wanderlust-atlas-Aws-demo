@@ -1,4 +1,5 @@
-# Wanderlust-atlas-
+# Wanderlust-atlas-AWS-demo
+
 Wanderlust Atlas:  A modern travel discovery app with a clean, application-like interface.
 Features included:
 - Introduction / landing page
