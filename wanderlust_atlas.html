@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderlust Atlas — Find your next somewhere</title>
+<style>
+:root{--bg:#f6f4ef;--paper:#fffefa;--ink:#17221d;--muted:#788078;--line:#e7e4dc;--green:#254d3b;--lime:#d7f36a;--peach:#f4b99b;--shadow:0 18px 50px #1d2b2110}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;transition:.25s}
+body.dark{--bg:#141b17;--paper:#202a24;--ink:#edf2ec;--muted:#a2aea4;--line:#354139;--green:#b8e4c8;--lime:#c6e85b;--peach:#bd8b70;--shadow:0 18px 50px #0004}
+button,input{font:inherit}button{cursor:pointer}.shell{max-width:1180px;margin:auto;padding:26px 30px 60px}
+nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.7px;font-size:19px}.brand-mark{width:34px;height:34px;border-radius:12px;background:var(--green);color:var(--paper);display:grid;place-items:center;font-size:19px}.nav-right{display:flex;align-items:center;gap:12px}.nav-link{border:0;background:none;color:var(--muted);font-size:13px;font-weight:650;padding:10px}.icon-btn{width:39px;height:39px;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--ink)}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;margin-bottom:50px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--green);font-weight:850}.hero h1{font-size:clamp(42px,6vw,70px);line-height:.99;letter-spacing:-4px;margin:17px 0 20px;max-width:650px}.hero h1 em{font-family:Georgia,serif;font-weight:500;color:#78956e}.hero p{color:var(--muted);line-height:1.7;max-width:490px;font-size:15px}.hero-actions{display:flex;gap:12px;margin-top:26px;align-items:center}.primary{border:0;border-radius:30px;padding:13px 20px;background:var(--green);color:var(--paper);font-weight:750;font-size:13px}.secondary{border:1px solid var(--line);border-radius:30px;padding:12px 18px;background:var(--paper);color:var(--ink);font-weight:700;font-size:13px}.hero-art{height:340px;border-radius:28px;overflow:hidden;position:relative;background:linear-gradient(140deg,#b9c7a4,#e5b99a 60%,#829c87);box-shadow:var(--shadow)}.sun{position:absolute;width:125px;height:125px;background:#f8df9c;border-radius:50%;top:42px;right:66px}.hill{position:absolute;bottom:-50px;width:120%;height:210px;border-radius:50% 50% 0 0}.hill.one{background:#6d8b70;left:-25%;transform:rotate(-9deg)}.hill.two{background:#355e4b;left:15%;bottom:-90px;transform:rotate(9deg)}.art-label{position:absolute;bottom:22px;left:24px;color:#fff;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:800}.stamp{position:absolute;top:22px;left:22px;background:#fff9;border-radius:20px;padding:8px 12px;font-size:11px;font-weight:800}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}.section-head h2{font-size:27px;letter-spacing:-1px;margin:7px 0 0}.section-head p{color:var(--muted);font-size:13px;margin:0}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.filter{border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:24px;padding:8px 14px;font-size:12px;font-weight:700}.filter.active{background:var(--green);color:var(--paper);border-color:var(--green)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.place-card{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:transform .2s}.place-card:hover{transform:translateY(-4px)}.place-visual{height:175px;position:relative;display:flex;align-items:center;justify-content:center;font-size:68px;overflow:hidden}.place-visual:after{content:"";position:absolute;width:210px;height:90px;border-radius:50%;background:#ffffff30;bottom:-48px;left:-20px;transform:rotate(-14deg)}.visual-japan{background:linear-gradient(135deg,#e7a6a0,#f3d5b5)}.visual-italy{background:linear-gradient(135deg,#a6c3a4,#f1d49d)}.visual-iceland{background:linear-gradient(135deg,#a8c7d0,#dce4dc)}.visual-india{background:linear-gradient(135deg,#e6a96f,#f0d3a5)}.visual-morocco{background:linear-gradient(135deg,#d9a17c,#e8d0a4)}.visual-peru{background:linear-gradient(135deg,#9ab28b,#e2c08c)}.save{position:absolute;right:13px;top:13px;border:0;border-radius:50%;width:34px;height:34px;background:#fffE;color:#26352b;font-size:17px;z-index:1}.place-info{padding:17px}.place-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.place-top h3{margin:0;font-size:17px;letter-spacing:-.4px}.country{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}.place-info p{font-size:12px;color:var(--muted);line-height:1.5;min-height:37px}.place-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:14px}.tag{font-size:10px;font-weight:800;background:color-mix(in srgb,var(--lime) 35%,transparent);padding:6px 9px;border-radius:15px}.details{border:0;background:none;color:var(--green);font-size:12px;font-weight:800}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:46px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px}.panel h2{margin:7px 0 8px;font-size:23px;letter-spacing:-.8px}.panel p{font-size:13px;color:var(--muted);line-height:1.6}.planner-input{display:flex;gap:8px;margin-top:18px}.planner-input input{min-width:0;flex:1;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink);outline:none}.planner-input button{border:0;border-radius:12px;background:var(--green);color:var(--paper);padding:0 17px;font-weight:800}.plan-list{padding:0;margin:15px 0 0;list-style:none}.plan-list li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.remove{border:0;background:none;color:var(--muted);font-size:17px}.empty{font-size:12px;color:var(--muted);padding:10px 0}.fact{display:flex;gap:14px;align-items:flex-start;margin-top:18px}.fact-icon{width:40px;height:40px;flex:none;border-radius:13px;background:color-mix(in srgb,var(--lime) 35%,transparent);display:grid;place-items:center;font-size:19px}.fact strong{font-size:13px}.fact small{display:block;color:var(--muted);font-size:12px;line-height:1.5;margin-top:4px}
+footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);margin-top:50px;padding-top:22px;color:var(--muted);font-size:11px}
+.modal-backdrop{display:none;position:fixed;inset:0;background:#0d1712a8;z-index:5;align-items:center;justify-content:center;padding:20px}.modal-backdrop.show{display:flex}.modal{max-width:440px;width:100%;background:var(--paper);border-radius:22px;padding:25px;position:relative}.modal h2{margin:8px 0}.modal p{color:var(--muted);font-size:14px;line-height:1.65}.close{position:absolute;right:17px;top:14px;border:0;background:none;color:var(--ink);font-size:23px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:11px 17px;border-radius:24px;font-size:12px;opacity:0;transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero-art{height:250px}.cards{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}}
+@media(max-width:540px){.shell{padding:20px 17px 40px}nav{margin-bottom:35px}.nav-link{display:none}.hero h1{letter-spacing:-2.5px}.cards{grid-template-columns:1fr}.place-visual{height:190px}.section-head{align-items:start;gap:10px;flex-direction:column}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <nav>
+    <div class="brand"><span class="brand-mark">✳</span> wanderlust<span style="color:#8aa16f">.</span></div>
+    <div class="nav-right">
+      <button class="nav-link" onclick="document.querySelector('#discover').scrollIntoView({behavior:'smooth'})">Discover</button>
+      <button class="nav-link" onclick="document.querySelector('#planner').scrollIntoView({behavior:'smooth'})">My trip</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">☾</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">A little inspiration goes a long way</div>
+      <h1>Find your next <em>somewhere.</em></h1>
+      <p>A tiny corner of the internet for curious people. Explore places worth dreaming about, collect the ones you love, and sketch out your next adventure.</p>
+      <div class="hero-actions">
+        <button class="primary" onclick="document.querySelector('#discover').scrollIntoView({behavior:'smooth'})">Explore destinations ↗</button>
+        <button class="secondary" onclick="document.querySelector('#planner').scrollIntoView({behavior:'smooth'})">Build a mini trip</button>
+      </div>
+    </div>
+    <div class="hero-art" role="img" aria-label="Illustration of rolling green hills at sunset">
+      <div class="sun"></div><div class="hill one"></div><div class="hill two"></div>
+      <div class="stamp">✦ Your next chapter awaits</div><div class="art-label">Somewhere out there · 2026</div>
+    </div>
+  </section>
+
+  <section id="discover">
+    <div class="section-head"><div><div class="eyebrow">The world is wide</div><h2>Places to get lost in</h2></div><p id="resultCount">6 destinations to explore</p></div>
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="All">All places</button>
+      <button class="filter" data-filter="Culture">Culture</button>
+      <button class="filter" data-filter="Nature">Nature</button>
+      <button class="filter" data-filter="Food">Food</button>
+      <button class="filter" data-filter="Saved">♥ Saved</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section class="lower">
+    <div class="panel" id="planner">
+      <div class="eyebrow">Your little itinerary</div><h2>Make a plan, not a promise.</h2>
+      <p>Add places you want to visit. This mini planner lives right here in your browser—no account, no pressure.</p>
+      <div class="planner-input"><input id="planInput" type="text" placeholder="Add a place or an idea…" maxlength="60"><button id="addPlan">Add +</button></div>
+      <ul class="plan-list" id="planList"><li class="empty">Your adventure list is empty. Start dreaming ✨</li></ul>
+    </div>
+    <div class="panel">
+      <div class="eyebrow">Travel thoughtfully</div><h2>Good journeys leave good traces.</h2>
+      <p>Going somewhere is a privilege. A little curiosity and care can make the experience better for you and the people who call that place home.</p>
+      <div class="fact"><div class="fact-icon">🌱</div><div><strong>Choose local</strong><small>Eat at independent spots, shop from local makers, and support community guides.</small></div></div>
+      <div class="fact"><div class="fact-icon">🧭</div><div><strong>Stay curious</strong><small>Learn a few words, read about local customs, and leave room for surprises.</small></div></div>
+      <div class="fact"><div class="fact-icon">♻️</div><div><strong>Travel lighter</strong><small>Carry a reusable bottle, respect nature, and take only photographs.</small></div></div>
+    </div>
+  </section>
+  <footer><span>✳ wanderlust. — A small project for big daydreams.</span><span>Made for curious minds · Explore kindly</span></footer>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><button class="close" id="closeModal" aria-label="Close">×</button><div class="eyebrow" id="modalCountry"></div><h2 id="modalTitle"></h2><p id="modalText"></p><button class="primary" id="modalAdd">Add to my trip +</button></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const destinations = [
+ {id:'kyoto',name:'Kyoto',country:'Japan',category:'Culture',emoji:'🏯',visual:'visual-japan',desc:'Quiet lanes, temple gardens, and the art of slowing down.',detail:'Wander through the red gates of Fushimi Inari, visit a peaceful garden, and save time for a bowl of warming ramen. Spring blossoms and autumn leaves each bring a different kind of magic.'},
+ {id:'tuscany',name:'Tuscany',country:'Italy',category:'Food',emoji:'🍇',visual:'visual-italy',desc:'Hilltop villages, long lunches, and rolling vineyards.',detail:'Take the slow road between medieval villages, browse a local market, and enjoy regional pasta. Tuscany is best experienced without trying to fit every town into one day.'},
+ {id:'iceland',name:'Iceland',country:'North Atlantic',category:'Nature',emoji:'🏔️',visual:'visual-iceland',desc:'Waterfalls, volcanic landscapes, and wide-open skies.',detail:'Follow the south coast for dramatic waterfalls, black-sand beaches, and glacier views. Check road and weather conditions carefully, and always follow marked paths.'},
+ {id:'jaipur',name:'Jaipur',country:'India',category:'Culture',emoji:'🕌',visual:'visual-india',desc:'Rose-coloured streets, intricate palaces, and lively bazaars.',detail:'Explore the old city, admire the architecture of Hawa Mahal, and browse the colourful markets. Try local kachori and leave time to watch the city move at its own pace.'},
+ {id:'marrakech',name:'Marrakech',country:'Morocco',category:'Food',emoji:'🫖',visual:'visual-morocco',desc:'Spice-scented souks, courtyard riads, and mint tea.',detail:'Get happily lost in the medina, discover a quiet riad courtyard, and sample fragrant tagines. Ask before photographing people and agree on prices before buying.'},
+ {id:'cusco',name:'Cusco',country:'Peru',category:'Nature',emoji:'⛰️',visual:'visual-peru',desc:'Andean mountain air and ancient pathways.',detail:'Spend time adjusting to the altitude before strenuous hikes. Explore the historic centre, learn about Andean culture, and plan ahead for permits and transport to nearby sites.'}
+];
+let saved = new Set();
+let currentFilter = 'All';
+let selected = null;
+const cards = document.getElementById('cards');
+function renderCards(){
+ const shown = destinations.filter(d => currentFilter==='All' || (currentFilter==='Saved'?saved.has(d.id):d.category===currentFilter));
+ document.getElementById('resultCount').textContent = `${shown.length} destination${shown.length===1?'':'s'} to explore`;
+ cards.innerHTML = shown.length ? shown.map(d=>`<article class="place-card">
+   <div class="place-visual ${d.visual}"><span>${d.emoji}</span><button class="save" aria-label="Save ${d.name}" data-save="${d.id}">${saved.has(d.id)?'♥':'♡'}</button></div>
+   <div class="place-info"><div class="place-top"><h3>${d.name}</h3><span class="country">${d.country}</span></div><p>${d.desc}</p><div class="place-bottom"><span class="tag">${d.category}</span><button class="details" data-detail="${d.id}">Explore details ↗</button></div></div>
+ </article>`).join('') : '<p class="empty">No saved places yet. Tap the ♡ on a destination to keep it here.</p>';
+}
+document.getElementById('filters').addEventListener('click',e=>{
+ const b=e.target.closest('[data-filter]');if(!b)return;
+ currentFilter=b.dataset.filter;
+ document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));renderCards();
+});
+cards.addEventListener('click',e=>{
+ const saveBtn=e.target.closest('[data-save]');if(saveBtn){const id=saveBtn.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);renderCards();toast(saved.has(id)?'Saved to your favourites ♥':'Removed from saved places');return;}
+ const detailBtn=e.target.closest('[data-detail]');if(detailBtn)openDetails(detailBtn.dataset.detail);
+});
+function openDetails(id){selected=destinations.find(d=>d.id===id);document.getElementById('modalCountry').textContent=selected.country+' · '+selected.category;document.getElementById('modalTitle').textContent=selected.name;document.getElementById('modalText').textContent=selected.detail;document.getElementById('modalBackdrop').classList.add('show');}
+function closeDetails(){document.getElementById('modalBackdrop').classList.remove('show');}
+document.getElementById('closeModal').onclick=closeDetails;
+document.getElementById('modalBackdrop').addEventListener('click',e=>{if(e.target.id==='modalBackdrop')closeDetails();});
+document.getElementById('modalAdd').onclick=()=>{if(selected)addToPlan(selected.name);closeDetails();};
+const input=document.getElementById('planInput'), list=document.getElementById('planList');
+let plan=[];
+function renderPlan(){list.innerHTML=plan.length?plan.map((p,i)=>`<li><span>✧ ${escapeHtml(p)}</span><button class="remove" aria-label="Remove ${escapeHtml(p)}" data-remove="${i}">×</button></li>`).join(''):'<li class="empty">Your adventure list is empty. Start dreaming ✨</li>';}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function addToPlan(value){if(!value.trim())return;plan.push(value.trim());renderPlan();toast('Added to your mini itinerary ✨');}
+document.getElementById('addPlan').onclick=()=>{addToPlan(input.value);input.value='';input.focus();};
+input.addEventListener('keydown',e=>{if(e.key==='Enter'){addToPlan(input.value);input.value='';}});
+list.addEventListener('click',e=>{const b=e.target.closest('[data-remove]');if(b){plan.splice(Number(b.dataset.remove),1);renderPlan();}});
+document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('dark');document.getElementById('themeBtn').textContent=document.body.classList.contains('dark')?'☀':'☾';};
+let toastTimer;function toast(message){const t=document.getElementById('toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),1900);}
+renderCards();renderPlan();
+</script>
+</body>
+</html>
